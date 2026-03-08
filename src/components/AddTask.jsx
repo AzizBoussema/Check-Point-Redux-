@@ -3,14 +3,18 @@ import { useDispatch } from "react-redux";
 import { addTask } from "../JS/actions/todoActions";
 
 const AddTask = () => {
+
   const [description, setDescription] = useState("");
   const dispatch = useDispatch();
 
   const handleAdd = () => {
+
+    if(description === "") return;
+
     const newTask = {
-      id: Math.random(),
+      id: Date.now(),
       description,
-      isDone: false,
+      isDone: false
     };
 
     dispatch(addTask(newTask));
@@ -19,14 +23,18 @@ const AddTask = () => {
 
   return (
     <div>
+
       <input
         type="text"
-        placeholder="Add task..."
+        placeholder="Add new task..."
         value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={(e)=>setDescription(e.target.value)}
       />
 
-      <button onClick={handleAdd}>Add</button>
+      <button className="addBtn" onClick={handleAdd}>
+        Add Task
+      </button>
+
     </div>
   );
 };
